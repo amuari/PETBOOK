@@ -8,7 +8,11 @@ const petSchema = new mongoose.Schema(
     funFact: { type: String },
     status: { type: String, required: true },
     image: { type: String },
+    cloudinaryId: { type: String },
+
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
+
   {
     timestamps: true,
   }

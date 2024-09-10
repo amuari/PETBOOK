@@ -1,14 +1,68 @@
 /* eslint-disable react/prop-types */
-
+import { useState } from 'react'
 import { IconBrandGoogle } from '@tabler/icons-react'
 
 // Utility function for conditional class names
 const cn = (...classes) => classes.filter(Boolean).join(' ')
 
-export default function Login() {
-  const handleSubmit = (e) => {
+export default function Signup() {
+  // State variables for form inputs
+  const [formData, setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+  })
+
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  // Handler to update form state
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  // Handler for form submission
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Form submitted')
+    setError('')
+    setLoading(true)
+
+    // Basic validation
+    if (
+      !formData.firstname ||
+      !formData.lastname ||
+      !formData.email ||
+      !formData.password
+    ) {
+      setError('All fields are required.')
+      setLoading(false)
+      return
+    }
+
+    try {
+      // Simulating an API call
+      const response = await fetch('https://api.example.com/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to sign up')
+      }
+
+      console.log('User signed up successfully')
+      // You can handle the success response here
+    } catch (err) {
+      setError(err.message || 'Something went wrong')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -17,13 +71,31 @@ export default function Login() {
         Welcome to MeetPaw
       </h2>
       <p className='text-background text-sm max-w-sm mt-2 dark:text-neutral-300'>
-        Login to MeetPaw
+        Sign up to MeetPaw
       </p>
       <form className='my-8' onSubmit={handleSubmit}>
         <div className='flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4'>
           <LabelInputContainer>
-            <label htmlFor='firstname'>Username</label>
-            <input id='firstname' placeholder='Tyler' type='text' required />
+            <label htmlFor='firstname'>First name</label>
+            <input
+              id='firstname'
+              placeholder='Tyler'
+              type='text'
+              value={formData.firstname}
+              onChange={handleChange}
+              required
+            />
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <label htmlFor='lastname'>Last name</label>
+            <input
+              id='lastname'
+              placeholder='Durden'
+              type='text'
+              value={formData.lastname}
+              onChange={handleChange}
+              required
+            />
           </LabelInputContainer>
         </div>
         <LabelInputContainer className='mb-4'>
@@ -32,6 +104,8 @@ export default function Login() {
             id='email'
             placeholder='ownerofpet@youremail.com'
             type='email'
+            value={formData.email}
+            onChange={handleChange}
             required
           />
         </LabelInputContainer>
@@ -41,15 +115,20 @@ export default function Login() {
             id='password'
             placeholder='••••••••'
             type='password'
+            value={formData.password}
+            onChange={handleChange}
             required
           />
         </LabelInputContainer>
 
+        {error && <p className='text-red-500 text-sm'>{error}</p>}
+
         <button
           className='bg-accent-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]'
           type='submit'
+          disabled={loading}
         >
-          Login &rarr;
+          {loading ? 'Signing up...' : 'Sign up &rarr;'}
         </button>
 
         <div className='bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full' />

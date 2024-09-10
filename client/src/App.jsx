@@ -6,6 +6,7 @@ import Upload from './components/Upload'
 import Profile from './components/Profile'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Signup from './components/SignUp'
 const App = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Hompepage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
           <Route path='/pets' element={<Pets />} />
           <Route path='/upload' element={<Upload />} />
           <Route path='/profile' element={<Profile />} />

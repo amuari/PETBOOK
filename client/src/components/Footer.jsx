@@ -1,24 +1,22 @@
 const navigation = {
   connect: [
-    { name: 'Book Meeting', href: '' },
     {
       name: 'Twitter',
-      href: 'https://twitter.com/justansub',
+      href: '/',
     },
     {
       name: 'Github',
-      href: 'https://www.youtube.com/@SpeedyBrand-SEO',
+      href: '/',
     },
     {
       name: 'LinkedIn',
-      href: 'https://www.linkedin.com/company/speedy-brand-inc/',
+      href: '/',
     },
   ],
   company: [
-    { name: 'Blogs', href: '/' },
-    { name: 'Pricing', href: '/' },
-    { name: 'Affiliate Partner', href: '/' },
-    { name: 'AI For Enterprise', href: '/' },
+    { name: 'Pets', href: '/pets' },
+    { name: 'Upload', href: '/upload' },
+    { name: 'Profile', href: '/profile' },
   ],
 }
 
@@ -38,7 +36,7 @@ const TwoColumnFooter = () => {
               Not your average component library - build faster, launch sooner.
             </p>
             <div className='flex space-x-6 text-sm text-gray-700  dark:text-gray-300'>
-              <div>Made with ❤️ by Ansub.</div>
+              {/* <div>Made with ❤️ by Derrick Amuah Abbey.</div> */}
             </div>
           </div>
           {/* Navigations */}
@@ -85,7 +83,7 @@ const TwoColumnFooter = () => {
         </div>
         <div className='mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 dark:border-gray-100/10'>
           <p className='text-xs leading-5 text-gray-700 dark:text-gray-300'>
-            &copy; 2024 SyntaxUI. All rights reserved.
+            &copy; 2024 AmuariDev. All rights reserved.
           </p>
         </div>
       </div>

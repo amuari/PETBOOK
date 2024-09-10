@@ -1,5 +1,6 @@
 const Pet = require('../model/petModel')
 const mongoose = require('mongoose')
+const cloudinary = require('../middleware/cloudinary')
 
 module.exports = {
   getPets: async (req, res) => {
@@ -16,13 +17,17 @@ module.exports = {
   },
   createPet: async (req, res) => {
     try {
+      console.log(req.body)
+      // Upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path)
       const newPet = await Pet.create({
         name: req.body.name,
         age: req.body.age,
         favoriteFood: req.body.favoriteFood,
         funFact: req.body.funFact,
         status: req.body.status,
-        // image: req.file.filename,
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
       })
       await newPet.save()
       res.json(newPet)

@@ -1,10 +1,12 @@
+import Button from './Button'
+
 const Navbar = () => {
   return (
     <div>
       <nav className='container  flex justify-around p-10  text-text'>
         {/* logo */}
         <span className='font-extrabold text-2xl'>
-          <a href='/'>PETBOOK</a>
+          <a href='/'>MEETPAW</a>
         </span>
         <div className='space-x-5'>
           <a href='/'>Home</a>
@@ -12,6 +14,9 @@ const Navbar = () => {
           <a href='/upload'>Upload</a>
           <a href='/profile'>Profile</a>
         </div>
+        <a href='/login'>
+          <Button text='login' />
+        </a>
       </nav>
     </div>
   )
